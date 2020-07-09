@@ -24,7 +24,7 @@ public class ClassUtil {
 
     public static void main(String[] args) {
 
-        List<Class<?>> list = getClassesWithAnnotationFromPackage("com.easyframework.easydict.dictionary", DictModel.class);
+        List<Class<?>> list = getClassesWithAnnotationFromPackage("com.easyframework", DictModel.class);
         System.out.println(list.get(0).getSimpleName());
 
     }
@@ -54,6 +54,10 @@ public class ClassUtil {
                     filePath = URLDecoder.decode(url.getFile(), "UTF-8");///D:/E/workspaceGitub/springboot/JSONDemo/target/classes/com/yq/controller
                 }catch (UnsupportedEncodingException e) {
                    // log.error("Failed to decode class file", e);
+                }
+                if(System.getProperties().getProperty("os.name").toUpperCase().indexOf("WINDOWS") != -1
+                && filePath.startsWith("/")){
+                    filePath = filePath.substring(1);
                 }
 
                 getClassesWithAnnotationFromFilePath(packageName, filePath, classList, annotation);
